@@ -108,7 +108,8 @@
                 }
                 if($("#node-config-input-tcp_server").val()!==undefined) data.tcp.server = $("#node-config-input-tcp_server").val();
                 if($("#node-config-input-tcp_port").val()!==undefined) data.tcp.port = $("#node-config-input-tcp_port").val();
-                let out = {data:node,config:data};
+                //let out = {data:node,config:data};
+				let out = {config:data};
                 $.ajax({
                 contentType: 'application/json',
                 data: JSON.stringify(out),
