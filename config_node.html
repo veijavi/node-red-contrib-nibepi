@@ -14,6 +14,9 @@
             connection: {value:"serial",required:true},
             serial_port: {value:"/dev/ttyAMA0",required:false},
             nibegw: {value:"",required:false},
+			nibegw_listening_port: {value:"9999",required:false},
+			nibegw_read_request_port: {value:"10000",required:false},
+			nibegw_control_port: {value:"10001",required:false},
             tcp_server: {value:"",required:false},
             tcp_port: {value:"",required:false}
             
@@ -35,6 +38,9 @@
                 $("#node-config-input-connection_series").val(data.connection.series)
                 $("#node-config-input-serial_port").val(data.serial.port);
                 $("#node-config-input-nibegw").val(data.serial.port);
+				$("#node-config-input-nibegw_listening_port").val(data.nibegw.listening_port);
+				$("#node-config-input-nibegw_read_request_port").val(data.nibegw.read_request_port);
+				$("#node-config-input-nibegw_control_port").val(data.nibegw.control_port);
                 $("#node-config-input-tcp_server").val(data.tcp.server);
                 $("#node-config-input-tcp_port").val(data.tcp.port);
                 showHide();
@@ -46,6 +52,9 @@
                         $("#node-config-input-connection").val('tcp')
                         $("#node-config-input-serial_port").hide()
                         $("#node-config-input-nibegw").hide();
+						$("#node-config-input-nibegw_listening_port").hide();
+						$("#node-config-input-nibegw_read_request_port").hide();
+						$("#node-config-input-nibegw_control_port").hide();
                         $("#node-config-input-tcp_server").show();
                         $("#node-config-input-tcp_port").show();
                         $('#node-config-input-connection option[value="serial"]').hide();
@@ -57,9 +66,15 @@
                         }
                         if($("#node-config-input-connection").val()=="nibegw") {
                             $("#node-config-input-nibegw").show();
+							$("#node-config-input-nibegw_listening_port").show();
+							$("#node-config-input-nibegw_read_request_port").show();
+							$("#node-config-input-nibegw_control_port").show();
                             $("#node-config-input-serial_port").hide()
                         } else if($("#node-config-input-connection").val()=="serial") {
                             $("#node-config-input-nibegw").hide();
+							$("#node-config-input-nibegw_listening_port").hide();
+							$("#node-config-input-nibegw_read_request_port").hide();
+							$("#node-config-input-nibegw_control_port").hide();
                             $("#node-config-input-serial_port").show()
                         }
                         $("#node-config-input-tcp_server").hide();
@@ -78,6 +93,7 @@
                 if(data.connection===undefined) data.connection = {};
                 if(data.serial===undefined) data.serial = {};
                 if(data.tcp===undefined) data.tcp = {};
+				if(data.nibegw===undefined) data.nibegw = {};
                 if ($('#node-config-input-readonly').is(':checked')) {
                     data.system.readonly = true;
                 } else {
@@ -103,6 +119,9 @@
                 if($("#node-config-input-connection_series").val()!==undefined) data.connection.series = $("#node-config-input-connection_series").val();
                 if(data.connection.enable=="nibegw") {
                     if($("#node-config-input-nibegw").val()!==undefined) data.serial.port = $("#node-config-input-nibegw").val();
+					if($("#node-config-input-nibegw_listening_port").val()!==undefined) data.nibegw.listening_port = $("#node-config-input-nibegw_listening_port").val();
+					if($("#node-config-input-nibegw_read_request_port").val()!==undefined) data.nibegw.read_request_port = $("#node-config-input-nibegw_read_request_port").val();
+					if($("#node-config-input-nibegw_control_port").val()!==undefined) data.nibegw.control_port = $("#node-config-input-nibegw_control_port").val();
                 } else {
                     if($("#node-config-input-serial_port").val()!==undefined) data.serial.port = $("#node-config-input-serial_port").val();
                 }
@@ -153,6 +172,18 @@
     <div class="form-row">
         <label for="node-config-input-nibegw"> NibeGW Host</label>
         <input type="text" id="node-config-input-nibegw">
+    </div>
+	    <div class="form-row">
+        <label for="node-config-input-nibegw_listening_port"> NibeGW UDP listening port</label>
+        <input type="text" id="node-config-input-nibegw_listening_port">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-nibegw_read_request_port"> NibeGW UDP read request port</label>
+        <input type="text" id="node-config-input-nibegw_read_request_port">
+    </div>
+	    <div class="form-row">
+        <label for="node-config-input-nibegw_control_port"> NibeGW UDP control port</label>
+        <input type="text" id="node-config-input-nibegw_control_port">
     </div>
     <div class="form-row">
         <label for="node-config-input-tcp_server"><i class="icon-bookmark"></i> TCP Server</label>
